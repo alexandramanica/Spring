@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Client - Orders</title>
+</head>
+<body>
+
+<h2>Orders</h2>
+
+<h2>Orders client</h2>
+<p class="msg" th:if="${msg}" th:text="${msg}"></p>
+
+<form method="get" th:action="@{/client/orders}">
+  <label>Status:</label>
+
+  <label>Email:</label>
+  <input type="text" name="email" th:value="${filterEmail}"/>
+
+  <button type="submit">Filter</button>
+  <a th:href="@{/client/orders}">Reset</a>
+</form>
+
+</hr>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr th:each="o : ${orders}">
+      <td th:text="${o.id}"></td>
+      <td th:text="${o.orderDate}"></td>
+      <td th:text="${o.price}"></td>
+      <td th:text="${o.orderStatus}"></td>
+      <td th:text="${o.email}"></td>
+      <td>
+        <a th:href="@{/client/notifications/{orderId}(orderId=${o.id})}">Notifications</a>
+      </td>
+    </tr>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

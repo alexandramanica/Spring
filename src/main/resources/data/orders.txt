@@ -1,0 +1,7 @@
+2026-01-02,120.50,PLASATA,ana.popescu@gmail.com
+2026-01-03,75.00,PROCESATA,mihai.ionescu@gmail.com
+2026-01-04,210.99,EXPEDIATA,ioana.dumitru@gmail.com
+2026-01-05,49.90,LIVRATA,vlad.marinescu@gmail.com
+2026-01-06,180.00,PLASATA,elena.stan@gmail.com
+2026-01-07,99.99,PROCESATA,ana.popescu@gmail.com
+2026-01-08,15.50,PLASATA,mihai.ionescu@gmail.com

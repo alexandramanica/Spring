@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Orders</title>
+</head>
+<body>
+
+<h2>Orders</h2>
+
+<p class="msg" th:if="${msg}" th:text="${msg}"></p>
+<p class="error" th:if="${error}" th:text="${error}"></p>
+
+<!-- FILTRARE -->
+<form method="get" th:action="@{/admin/orders}">
+    <label>Status:</label>
+    <select name="orderStatus">
+        <option value="">-- any --</option>
+        <option th:each="st : ${allStatuses}"
+                th:value="${st}"
+                th:text="${st}"
+                th:selected="${filterStatus == st.name()}">
+        </option>
+    </select>
+
+    <label>Email:</label>
+    <input type="text" name="email" th:value="${filterEmail}"/>
+
+    <label>Date (yyyy-MM-dd):</label>
+    <input type="text" name="date" th:value="${filterDate}"/>
+
+    <button type="submit">Filter</button>
+    <a th:href="@{/admin/orders}">Reset</a>
+</form>
+
+<hr/>
+
+<!-- TABEL COMENZI -->
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="o : ${orders}">
+        <td th:text="${o.id}"></td>
+        <td th:text="${o.orderDate}"></td>
+        <td th:text="${o.price}"></td>
+        <td th:text="${o.orderStatus}"></td>
+        <td th:text="${o.email}"></td>
+        <td>
+            <a th:href="@{/admin/order/{id}(id=${o.id})}">Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client - Orders</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Message</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="o : ${notifications}">
+        <td th:text="${o.id}"></td>
+        <td th:text="${o.createdAt}"></td>
+        <td th:text="${o.notificationMessage}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

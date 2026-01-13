@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Order</title>
+</head>
+<body>
+
+<h2>Edit Order</h2>
+
+<p th:if="${msg}" th:text="${msg}" style="color:green;"></p>
+<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+<form th:action="@{/client/orders/{id}/edit(id=${orderId})}"
+      th:object="${order}"
+      method="post">
+
+    <!-- EMAIL doar afișat, NU editabil -->
+    <label>Email client:</label>
+    <input type="text"
+           th:value="${order.email}"
+           readonly />
+    <br/>
+
+    <!-- PRICE -->
+    <label>Price:</label>
+    <input type="number"
+           step="0.01"
+           th:field="*{price}"
+           required />
+    <br/>
+
+    <!-- DATE -->
+    <label>Date:</label>
+    <input type="date"
+           th:field="*{orderDate}"
+           required />
+    <br/>
+
+    <!-- STATUS -->
+    <label>Status:</label>
+    <select th:field="*{orderStatus}" required>
+        <option th:each="st : ${allStatuses}"
+                th:value="${st}"
+                th:text="${st}">
+        </option>
+    </select>
+    <br/>
+
+    <button type="submit">Save changes</button>
+    <a th:href="@{/client/orders}">Cancel</a>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order details</title>
+    <style>
+        .msg { color: green; }
+        .box { border: 1px solid #ccc; padding: 10px; width: 400px; }
+    </style>
+</head>
+<body>
+
+<a th:href="@{/admin/orders}">← Back to orders</a>
+
+<h2>Order details</h2>
+
+<p class="msg" th:if="${msg}" th:text="${msg}"></p>
+
+<div class="box">
+    <p><b>ID:</b> <span th:text="${order.id}"></span></p>
+    <p><b>Date:</b> <span th:text="${order.orderDate}"></span></p>
+    <p><b>Price:</b> <span th:text="${order.price}"></span></p>
+    <p><b>Status:</b> <span th:text="${order.orderStatus}"></span></p>
+    <p><b>Email:</b> <span th:text="${order.email}"></span></p>
+</div>
+
+<hr/>
+
+<!-- UPDATE STATUS -->
+<h3>Update status</h3>
+<form method="post"
+      th:action="@{/admin/orders/{id}/status(id=${order.id})}">
+    <select name="orderStatus">
+        <option th:each="st : ${allStatuses}"
+                th:value="${st}"
+                th:text="${st}"
+                th:selected="${st == order.orderStatus}">
+        </option>
+    </select>
+    <button type="submit">Update</button>
+</form>
+
+<hr/>
+
+<!-- CANCEL ORDER -->
+<h3>Cancel order</h3>
+<form method="post"
+      th:action="@{/admin/orders/{id}/cancel(id=${order.id})}">
+    <button type="submit"
+            onclick="return confirm('Are you sure you want to cancel this order?');">
+        Cancel order
+    </button>
+</form>
+
+</body>
+</html>
