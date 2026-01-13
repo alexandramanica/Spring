@@ -1,0 +1,23 @@
+Spring boot initializer https://start.spring.io/index.html
+Java 17, properties, maven
+
+dependite h2, spring web, spring data jpa, thymeleaf
+
+baza de date
+
+spring.application.name=OrderProject-MVC
+server.port=8080
+
+# === H2 DATABASE ===
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+# === JPA / HIBERNATE ===
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=false
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
