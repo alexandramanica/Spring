@@ -22,6 +22,37 @@ spring.jpa.show-sql=false
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2
 
+//Many to many 
+Complaint ↔ Product (o reclamație poate include mai multe produse/servicii, un produs poate apărea în multe reclamații)
+@Entity
+@Table(name = "complaints")
+public class Complaint {
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @ManyToMany
+  @JoinTable(
+      name = "complaint_items",
+      joinColumns = @JoinColumn(name = "complaint_id"),
+      inverseJoinColumns = @JoinColumn(name = "product_id")
+  )
+  private Set<Product> items = new HashSet<>();
+
+  // restul câmpurilor: client, status, title etc.
+}
+
+
+@Entity
+@Table(name = "products")
+public class Product {
+  @Id
+  private String id;
+
+  private String name;
+
+  @ManyToMany(mappedBy = "items")
+  private Set<Complaint> complaints = new HashSet<>();
+}
 
 //SPECIFICATION SERVICIU APEL public List<Order> search(Map<FilterSpecification, String> filters) {
     Specification<Order> spec = Specification.where(null);
