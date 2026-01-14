@@ -21,3 +21,21 @@ spring.jpa.show-sql=false
 
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2
+
+
+//SPECIFICATION SERVICIU APEL public List<Order> search(Map<FilterSpecification, String> filters) {
+    Specification<Order> spec = Specification.where(null);
+
+    for (var entry : filters.entrySet()) {
+        if (entry.getValue() == null || entry.getValue().isBlank()) continue;
+
+        Specification<Order> part = specificationFactory
+                .getSpecification(entry.getKey())
+                .getOrdersSpecification(entry.getValue());
+
+        spec = spec.and(part);
+    }
+
+    return orderRepository.findAll(spec);
+}
+
